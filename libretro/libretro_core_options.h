@@ -397,7 +397,6 @@ struct retro_core_option_definition option_defs_us[] = {
         "True"
 #endif
     },
-#if !defined(VC) && !defined(HAVE_OPENGLES)
     {
         CORE_NAME "-EnableN64DepthCompare",
         "N64 Depth Compare",
@@ -420,7 +419,6 @@ struct retro_core_option_definition option_defs_us[] = {
         },
         "True"
     },
-#endif
     {
         CORE_NAME "-EnableTextureCache",
         "Cache Textures",
