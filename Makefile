@@ -169,13 +169,10 @@ else ifneq (,$(findstring rpi,$(platform)))
 	WITH_DYNAREC=aarch64
 	ifneq (,$(findstring rpi2,$(platform)))
 	CPUFLAGS += -mcpu=cortex-a7
-	HAVE_NEON = 1
 	else ifneq (,$(findstring rpi3,$(platform)))
 	CPUFLAGS += -march=armv8-a+crc -mtune=cortex-a53
-	HAVE_NEON = 1
 	else ifneq (,$(findstring rpi4,$(platform)))
 	CPUFLAGS += -march=armv8-a+crc -mtune=cortex-a72
-	HAVE_NEON = 1
 	endif
    endif
 
