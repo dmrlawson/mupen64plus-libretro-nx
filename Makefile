@@ -131,6 +131,7 @@ ifneq (,$(findstring unix,$(platform)))
 
 # Raspberry Pi
 else ifneq (,$(findstring rpi,$(platform)))
+   $(info    is rpi)
    TARGET := $(TARGET_NAME)_libretro.so
    LDFLAGS += -shared -Wl,--version-script=$(LIBRETRO_DIR)/link.T -Wl,--no-undefined -ldl
    ifeq ($(FORCE_GLES3),1)
@@ -154,28 +155,30 @@ else ifneq (,$(findstring rpi,$(platform)))
       INCFLAGS += -I/opt/vc/include -I/opt/vc/include/interface/vcos -I/opt/vc/include/interface/vcos/pthreads
    endif
    ifeq ($(ARCH), $(filter $(ARCH), arm))
+        $(info    is arm)
 	WITH_DYNAREC=arm
 	ifneq (,$(findstring rpi2,$(platform)))
-	CPUFLAGS += -mcpu=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=hard
-	HAVE_NEON = 1
+		CPUFLAGS += -mcpu=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=hard
+		HAVE_NEON = 1
 	else ifneq (,$(findstring rpi3,$(platform)))
-	CPUFLAGS += -march=armv8-a+crc -mtune=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard
-	HAVE_NEON = 1
+		CPUFLAGS += -march=armv8-a+crc -mtune=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard
+		HAVE_NEON = 1
 	else ifneq (,$(findstring rpi4,$(platform)))
-	CPUFLAGS += -march=armv8-a+crc -mtune=cortex-a72 -mfpu=neon-fp-armv8 -mfloat-abi=hard
-	HAVE_NEON = 1
+		CPUFLAGS += -march=armv8-a+crc -mtune=cortex-a72 -mfpu=neon-fp-armv8 -mfloat-abi=hard
+		HAVE_NEON = 1
 	endif
    else ifeq ($(ARCH), $(filter $(ARCH), aarch64))
+   $(info    is aarch64)
 	WITH_DYNAREC=aarch64
 	ifneq (,$(findstring rpi2,$(platform)))
-	CPUFLAGS += -mcpu=cortex-a7
-	HAVE_NEON = 0
+		CPUFLAGS += -mcpu=cortex-a7
+		HAVE_NEON = 0
 	else ifneq (,$(findstring rpi3,$(platform)))
-	CPUFLAGS += -march=armv8-a+crc -mtune=cortex-a53
-	HAVE_NEON = 0
+		CPUFLAGS += -march=armv8-a+crc -mtune=cortex-a53
+		HAVE_NEON = 0
 	else ifneq (,$(findstring rpi4,$(platform)))
-	CPUFLAGS += -march=armv8-a+crc -mtune=cortex-a72
-	HAVE_NEON = 0
+		CPUFLAGS += -march=armv8-a+crc -mtune=cortex-a72
+		HAVE_NEON = 0
 	endif
    endif
 
