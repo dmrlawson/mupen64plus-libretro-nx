@@ -165,7 +165,7 @@ else ifneq (,$(findstring rpi,$(platform)))
    endif
    ifeq ($(ARCH), aarch64)
       WITH_DYNAREC=aarch64
-      CPUFLAGS += -ffast-math
+      CPUFLAGS += -Ofast
    else
       WITH_DYNAREC=arm
       HAVE_NEON = 1
